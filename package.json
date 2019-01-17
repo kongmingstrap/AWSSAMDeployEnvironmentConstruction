@@ -1,0 +1,8 @@
+{
+  "name": "sam-deploy",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "cfn-lint": "^1.4.0"
+  }
+}
