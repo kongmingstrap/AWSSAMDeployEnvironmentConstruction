@@ -1,0 +1,30 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+Description: AWS SAM Deploy Stack
+
+Resources:
+  SAMArtifactBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub sam-artifacts-${AWS::AccountId}-${AWS::Region}
+
+  SAMDeployRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: sam-deploy-role
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: cloudformation.amazonaws.com
+            Action: sts:AssumeRole
+      Path: !Sub /${AWS::StackName}/
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess
+
+Outputs:
+  SAMArtifactBucketName:
+    Value: !Ref SAMArtifactBucket
+  SAMDeployRoleArn:
+    Value: !GetAtt SAMDeployRole.Arn
