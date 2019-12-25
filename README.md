@@ -42,7 +42,7 @@ $ ./build.sh
 ## 3. Deploy
 
 ```bash
-$ ./run.sh
+$ ./run.sh -t sam-deploy.yml
 ```
 
 # Output
